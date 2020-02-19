@@ -1,0 +1,37 @@
+//CONVERT JOB 1
+//    EXEC ASMACLG
+//C.SYSIN DD *
+Test    Start 0
+        Print Gen
+*       Convert register value to hex output
+*       copied from Ehrman Exercise 17.3.19 and 22.4.8
+        BAKR  14,0          SAVE CALLERS ENVIRONMENT
+        BASR  12,0          Establish a base register
+        Using *,12          tell the assembler about it
+*       Register Usage:
+*       4 value to get converted (will be destroyed)
+*       5 auxiliar register
+*       6 counter
+        L     4,value       get number to convert
+        OPEN  (RECDD,OUTPUT)
+        L     6,Hlen        get number of characters to produce
+HexDig  SRDL  4,4           throw low nibble to register 5
+        SRL   5,28          get low nibble in position
+        IC    5,EBCDIC(5)   get character form of low nibble
+        STC   5,HexStr(6)   store low nibble hex character
+*                           in output string
+        BCT   6,HexDig      repeat
+        PUT   RECDD,HexStr  send string to output
+        CLOSE (RECDD)
+EXIT    DS    0H             HALFWORD BOUNDRY ALIGNMENT
+        PR                   RETURN TO CALLER
+        EJECT
+value   DC    X'1234ABCD'    value to be converted
+Hlen    DC    F'8'           Length of hex string for 32 bit
+EBCDIC  DC    C'0123456789ABCDEF'   EBCDIC form of hex digits
+HexStr  DC    C'         ' buffer for converted string
+RECDD   DCB   DSORG=PS,MACRF=PM,DDNAME=RECDD,RECFM=FB,LRECL=9
+        END Test
+/*
+//L.SYSLMOD  DD DSN=&SYSUID..LOAD(CONVERT),DISP=SHR
+//G.RECDD    DD SYSOUT=*

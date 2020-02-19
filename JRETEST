@@ -1,0 +1,21 @@
+//JRETEST JOB 1                                            Line 1
+//    EXEC ASMACLG                                         Line 2
+//C.SYSIN DD *                                             Line 3
+Test   Start 0             First line of program           Line 4
+       Print NoGen                                         Line 5
+*      Sample Program                                      Line 6
+       BAKR  14,0          SAVE CALLERS ENVIRONMENT
+       LR    12,15         LOAD OUR ADDRESS IN REGISTER 12
+       Using Test,12       BASE REGISTER IS 12
+       OPEN  (RECDD,OUTPUT)
+       PUT   RECDD,MyName
+       CLOSE (RECDD)
+EXIT   DS    0H             HALFWORD BOUNDRY ALIGNMENT
+       PR                   RETURN TO CALLER
+       EJECT
+MyName DC    C'John R. Ehrman'  Define constant with name  Line 10
+RECDD  DCB   DSORG=PS,MACRF=PM,DDNAME=RECDD,RECFM=FB,LRECL=14
+       END Test            Last statement                  Line 11
+/*                                                         Line 12
+//L.SYSLMOD  DD DSN=&SYSUID..LOAD(JRETEST),DISP=SHR
+//G.RECDD    DD SYSOUT=*
