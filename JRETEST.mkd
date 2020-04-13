@@ -21,7 +21,7 @@ The RECDD output appears in JES.
     `scp JRETEST Z#####@192.86.32.91:`<br>
     substituting Z##### by Your user id.
  3. Use ssh and cp to copy the file from Your MTM Unix area to Your data set:<br>
-    `ssh Z53446@192.86.32.91 'cp JRETEST "//source(JRETEST)"'`
+    `ssh Z#####@192.86.32.91 'cp JRETEST "//source(JRETEST)"'`
 
 At step 3 an EDC5061I error may occur. In this case log off Your Z/OS
 account using option 2 (delete files) and try again.
