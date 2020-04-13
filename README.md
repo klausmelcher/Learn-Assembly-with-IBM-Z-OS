@@ -3,7 +3,8 @@
 Available online courses allow You to earn IBM badges, but these courses are rather expensive.
 
 I am trying to use the book
-[Assembler Language Programming for IBM z System Servers](http://idcp.marist.edu/enterprisesystemseducation/assemblerlanguageresources-1.html), documenting here what I am doing so others should be able to reproduce my steps.
+Assembler Language Programming for IBM z System Servers Version 2.00 John R. Ehrman, 
+documenting here what I am doing so others should be able to reproduce my steps.
 
 ## Get an account on a IBM Z computer
 
