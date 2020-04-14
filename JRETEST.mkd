@@ -1,7 +1,7 @@
 # Run the first example from git
 
 Figure 33 on page 81 of the book
-[Assembler Language Programming for IBM z System Servers](http://idcp.marist.edu/enterprisesystemseducation/assemblerlanguageresources-1.html)
+[Assembler Language Programming for IBM z System Servers](https://www.academia.edu/41083662/Assembler_Language_Programming_for_IBM_z_System_Servers_Version_1.00)
 contains the first complete assembly language program of the book.
 
 ## Modifications needed for book examples
@@ -16,8 +16,9 @@ The RECDD output appears in JES.
 
 ## Copy file from git repository to Z/OS data set
 
- 1. In Your Linux PC, use `git clone` as usual to create a working copy.
- 2. Use scp to copy a file from Your Linux PC to Your MTM Unix account:<br>
+ 1. In Your Linux PC, enter the Terminal and install git using `sudo apt install git`
+ 2. Use `git clone` as usual to create a working copy.
+ 3. Use scp to copy a file from Your Linux PC to Your MTM Unix account:<br>
     `scp JRETEST Z#####@192.86.32.91:`<br>
     substituting Z##### by Your user id.
  3. Use ssh and cp to copy the file from Your MTM Unix area to Your data set:<br>
