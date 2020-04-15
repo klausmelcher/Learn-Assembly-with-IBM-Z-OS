@@ -107,6 +107,10 @@ From here on You can follow the item<br>
 *Identify reason assembler program compile was unsuccessful*
 from [Challenge 10 of Part 3 of MTM](http://mtm2019.mybluemix.net/part_three/part_three_ch10.html)
 
+# Examine the Exercises of the Book
+
+Each subdirectory Ch_II, Ch_III, etc. contains the exercises of the corresponding chapter of the book 
+ "Assembler Language Programming for IBM z System Servers" by J. R. Ehrman.
 
 # Interesting Links
 
