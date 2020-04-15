@@ -108,3 +108,10 @@ From here on You can follow the item<br>
 from [Challenge 10 of Part 3 of MTM](http://mtm2019.mybluemix.net/part_three/part_three_ch10.html)
 
 
+# Interesting Links
+
+[Marist College Assembler resources](https://idcp.marist.edu/iw/assembler-resources)
+
+[Northern Illinois University Assembly course](http://faculty.cs.niu.edu/~hutchins/csci360/main.htm)
+
+[Western Illinois University Assemblty course](http://www.wiu.edu/users/mflll/cs310/head.html)
