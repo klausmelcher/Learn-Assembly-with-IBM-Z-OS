@@ -1,7 +1,7 @@
-//CONVD   JOB 1
+//E020101 JOB 1
 //    EXEC ASMACLG
 //C.SYSIN DD *
-*       Exercise Template
+*       Exercise 2.1.1 ******
 Test    Start 0
         Print NoGen
         BAKR  14,0          SAVE CALLERS ENVIRONMENT
@@ -10,7 +10,17 @@ Test    Start 0
         OPEN  (RECDD,OUTPUT)
 *--------------------------------------------------------------------*
 *       exercise starts here
-        L     4,=F'12345'   load decimal number in 4
+*       (a) ******
+        L     4,=B'0000 0000 0000 0000 0000 0000 0001 0110'
+        BAS   7,DigStr      call subroutine
+*       (b) ******
+        L     4,=B'0000 0000 0000 0000 0000 0000 0010 1100'
+        BAS   7,DigStr      call subroutine
+*       (c) ******
+        L     4,=B'0000 0000 0000 0000 0000 0000 1010 1010'
+        BAS   7,DigStr      call subroutine
+*       (d) ******
+        L     4,=B'0000 0000 0000 0000 0000 0000 0111 1111'
         BAS   7,DigStr      call subroutine
 *       exercise ends here
 *--------------------------------------------------------------------*
@@ -47,7 +57,7 @@ EXIT    DS    0H             HALFWORD BOUNDRY ALIGNMENT
         PR                   RETURN TO CALLER
         EJECT
 Base    DC    F'10'          Converson base (max 16)
-StrLen  DC    F'8'           Length of string (max 16)
+StrLen  DC    F'3'           Length of string (max 16)
 EBCDIC  DC    C'0123456789ABCDEF'   EBCDIC form of hex digits
 StrBuf  DC    C'                 '  buffer for converted string
 RECDD   DCB   DSORG=PS,MACRF=PM,DDNAME=RECDD,RECFM=FB,LRECL=17
