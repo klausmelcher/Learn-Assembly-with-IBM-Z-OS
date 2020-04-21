@@ -12,7 +12,7 @@ Test    Start 0
 *       exercise starts here
         L     4,=F'12345'   load decimal number in 4
         BAS   7,DigStr      call subroutine
-*       exercise ends here
+*        exercise ends here
 *--------------------------------------------------------------------*
         CLOSE (RECDD)
         J     EXIT
