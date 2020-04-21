@@ -22,7 +22,7 @@ Test    Start 0
 *       (d) ******
         L     4,=B'0000 0000 0000 0000 0000 0000 0111 1111'
         BAS   7,DigStr      call subroutine
-*       exercise ends here
+*        exercise ends here
 *--------------------------------------------------------------------*
         CLOSE (RECDD)
         J     EXIT
