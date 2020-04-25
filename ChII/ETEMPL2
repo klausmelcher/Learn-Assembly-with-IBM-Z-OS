@@ -1,0 +1,90 @@
+//ETEMPL  JOB 1
+//    EXEC ASMACLG
+//C.SYSIN DD *
+*       Exercise Template
+Test    Start 0
+        Print NoGen
+        BAKR  14,0          SAVE CALLERS ENVIRONMENT
+        BASR  12,0          Establish a base register
+        Using *,12          tell the assembler about it
+        OPEN  (RECDD,OUTPUT)
+*       Register Usage: ******
+RBase   EQU  3   number base (preserved in subroutine calls)
+RValue  EQU  4   value to get converted (will be destroyed)
+Rdiv    EQU  5   auxiliar register for dividend
+RCount  EQU  6   counter for digit string
+RStrPos EQU  7   position in string where to write
+Rret    EQU  8   return address
+        L     RStrPos,StrLen  set string position to right margin
+        L     RBase,Decimal   set number base to decimal
+*--------------------------------------------------------------------*
+*       exercise starts here ******
+        L     RValue,=F'12345'  load decimal number in value register
+        BAS   Rret,DigStr       put value digits in line string
+        L     RBase,Hex         change to hexadecimal representation
+        L     RValue,=F'6789'   load decimal number in value register
+        BAS   Rret,DigStr       put it on the same line
+        BAS   Rret,PrtLn        print first line
+        L     Rbase,Decimal     change back to decimal representation
+        L     RValue,=F'55555'  load decimal number in 4
+        BAS   Rret,DigStr       put it in the second line
+        BAS   Rret,PrtLn        print second line
+*       exercise ends here ******
+*--------------------------------------------------------------------*
+        CLOSE (RECDD)
+        J     EXIT
+*--------------------------------------------------------------------*
+*       Subroutine DigStr
+*         converts register value to digit string representation
+*       Input parameters:
+*         DigLen - number of digits for output
+*       References: J.R. Ehrman,
+*         Exercises 17.3.19 and 22.4.8
+*         Sections 18.6.1, 37.1.1 and 37.1.2
+*       Author: Elmar Melcher, UFCG
+DigStr  L     RCount,DigLen  Get number of characters to produce
+NxtDig  SRDA  RValue,32      Sign-extend to double length using Rdiv
+        DR    RValue,RBase   Divide value by base, remainder in RValue
+        IC    RValue,EBCDIC(RValue)  Get character form of remainder
+        STC   RValue,StrBuf(RstrPos) Store character in string
+        S     RStrPos,ONE    advance string position to the left
+        SLDL  RValue,32      Copy quotient from Rdiv to RValue
+        BCT   RCount,NxtDig  Repeat
+        S     RStrPos,ONE    leave one space
+        BR    Rret           Return - End of subroutine DigStr
+*--------------------------------------------------------------------*
+*       Subroutine PrtLn
+*         prints string line buffer,
+*         then fills it with space and
+*         resets string position to rightmost position
+*       Register Usage:
+RSpace  EQU  4   value for space character (overlay of RValue)
+*       Input parameters: none
+*       Author: Elmar Melcher, UFCG
+PrtLn   PUT   RECDD,StrBuf   Send string to output
+        L     RCount,StrLen  get number of characters in string
+        LA    RValue,16      load position of space character
+        IC    RValue,EBCDIC(RValue)  load space character
+Wipe    STC   RValue,StrBuf(RCount)  store space character in string
+        BCT   RCount,Wipe    repeat
+        L     RStrPos,StrLen set string position to right margin
+        BR    Rret           Return - End of subroutine
+*--------------------------------------------------------------------*
+EXIT    DS    0H             HALFWORD BOUNDRY ALIGNMENT
+        PR                   RETURN TO CALLER
+        EJECT
+ONE     DC    F'1'           constant 1
+Binary  DC    F'2'           binary number base
+Octal   DC    F'8'           octal number base
+Decimal DC    F'10'          decimal number base
+Hex     DC    F'16'          hexadecimal number base
+DigLen  DC    F'5'           Length of digit string (max 16)
+EBCDIC  DC    C'0123456789ABCDEF ' EBCDIC hex digits plus space
+StrLen  DC    F'50'          Length of line string
+*       Line buffer
+StrBuf  DC    C'                                                  '
+RECDD   DCB   DSORG=PS,MACRF=PM,DDNAME=RECDD,RECFM=FB,LRECL=51
+        END Test
+/*
+//L.SYSLMOD  DD DSN=&SYSUID..LOAD(CONVD),DISP=SHR
+//G.RECDD    DD SYSOUT=*
