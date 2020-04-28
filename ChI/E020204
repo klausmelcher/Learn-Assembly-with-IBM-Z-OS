@@ -1,7 +1,7 @@
 //E020204 JOB 1
 //    EXEC ASMACLG
 //C.SYSIN DD *
-*       Exercise Template
+*       Exercise 2.2.4 ******
 Test    Start 0
         Print NoGen
         BAKR  14,0          SAVE CALLERS ENVIRONMENT
