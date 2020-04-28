@@ -1,4 +1,4 @@
-# Exercises from the Chapter II    
+# Exercises from the Chapter I    
 Assembler Language Programming
 for
 IBM System z TM Servers
