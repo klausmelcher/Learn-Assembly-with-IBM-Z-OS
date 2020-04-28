@@ -31,20 +31,20 @@ Rret    EQU  8   return address
         L     RValue,=F'1'
         BAS   Rret,DigStr       put value digits in line string
         L     RValue,=F'1' 
-        S     RValue,=F'1'
+        A     RValue,=F'1'
         BAS   Rret,DigStr       put value digits in line string
         L     RValue,=F'1'
-        S     RValue,=F'2'
+        A     RValue,=F'2'
         BAS   Rret,DigStr       put value digits in line string
         BAS   Rret,PrtLn        print first line
         
 	L     RValue,=F'2'
         BAS   Rret,DigStr       put value digits in line string
         L     RValue,=F'2'
-        S     RValue,=F'1'
+        A     RValue,=F'1'
         BAS   Rret,DigStr       put value digits in line string
         L     RValue,=F'2'
-        S     RValue,=F'2'
+        A     RValue,=F'2'
         BAS   Rret,DigStr       put value digits in line string
         BAS   Rret,PrtLn        print first line
 
