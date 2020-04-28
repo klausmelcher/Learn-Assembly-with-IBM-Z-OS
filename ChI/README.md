@@ -9,7 +9,7 @@ The author did not intend to use assembly programs in this chapter,
 however I guess the best way to learn assembly is writing assembly programs.
 Doing so by using ETEMPL2 as starting template is quite easy.
 
-## How to use ETEMPL2
+## How to use ETEMPL
 
 There are only a few things I need to know:
 
