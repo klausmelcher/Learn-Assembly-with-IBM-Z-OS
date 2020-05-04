@@ -46,3 +46,6 @@ ETEMPL2 file.
 ## Exercises missing here
 
 Some exercises are quite impossible to solve as Assembly programs. They are:
+
+- Exercise 2.2.5: Octal numbers cannot be interpreted by Assembler
+- Exercise 2.3.6: Octal numbers cannot be interpreted by Assembler 
