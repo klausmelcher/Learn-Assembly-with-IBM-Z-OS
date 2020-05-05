@@ -40,6 +40,22 @@ Rret    EQU  8   return address from subroutine
         BAS   Rret,DigStr
         L     RValue,=XL4'08'
         BAS   Rret,DigStr
+        L     RValue,=XL4'09'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0A'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0B'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0C'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0D'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0E'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0F'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'10'
+        BAS   Rret,DigStr
         BAS   Rret,PrtLn
 * Above hex numbers to the power of 2
         LA    RValue,=C'SQRE'
@@ -67,30 +83,6 @@ Rret    EQU  8   return address from subroutine
         L     RValue,=XL4'08'
         MSR   RValue,RValue
         BAS   Rret,DigStr
-        BAS   Rret,PrtLn
-*
-        LA    RValue,=C'HEX'
-        BAS   Rret,CharStr
-        L     RValue,=XL4'09'
-        BAS   Rret,DigStr
-        L     RValue,=XL4'0A'
-        BAS   Rret,DigStr
-        L     RValue,=XL4'0B'
-        BAS   Rret,DigStr
-        L     RValue,=XL4'0C'
-        BAS   Rret,DigStr
-        L     RValue,=XL4'0D'
-        BAS   Rret,DigStr
-        L     RValue,=XL4'0E'
-        BAS   Rret,DigStr
-        L     RValue,=XL4'0F'
-        BAS   Rret,DigStr
-        L     RValue,=XL4'10'
-        BAS   Rret,DigStr
-        BAS   Rret,PrtLn
-*
-        LA    RValue,=C'SQRE'
-        BAS   Rret,CharStr
         L     RValue,=XL4'09'
         MSR   RValue,RValue
         BAS   Rret,DigStr
@@ -135,6 +127,22 @@ Rret    EQU  8   return address from subroutine
         BAS   Rret,DigStr
         L     RValue,=XL4'18'
         BAS   Rret,DigStr
+        L     RValue,=XL4'19'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1A'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1B'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1C'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1D'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1E'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1F'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'20'
+        BAS   Rret,DigStr
         BAS   Rret,PrtLn
 *
         LA    RValue,=C'SQRE'
@@ -163,8 +171,31 @@ Rret    EQU  8   return address from subroutine
         L     RValue,=XL4'18'
         MSR   RValue,RValue
         BAS   Rret,DigStr
+        L     RValue,=XL4'19'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1A'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1B'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1C'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1D'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1E'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'1F'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'20'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
         BAS   Rret,PrtLn
-*
 *       exercise ends here ******
 *--------------------------------------------------------------------*
         CLOSE (RECDD)
@@ -232,7 +263,7 @@ Binary  DC    F'2'           binary number base
 Octal   DC    F'8'           octal number base
 Decimal DC    F'10'          decimal number base
 Hex     DC    F'16'          hexadecimal number base
-DigLen  DC    F'4'           Length of string
+DigLen  DC    F'3'           Length of string
 EBCDIC  DC    C'0123456789ABCDEF ' EBCDIC hex digits plus space
 StrLen  DC    F'70'          Length of line string
 *       Line buffer
