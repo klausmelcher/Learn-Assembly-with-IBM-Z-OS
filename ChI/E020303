@@ -21,6 +21,9 @@ Rret    EQU  8   return address from subroutine
 *       exercise starts here ******
 *       Square table of hexadecimal numbers
         L     RBase,Hex
+*       List of hex numbers
+        LA    RValue,=C'HEX'
+        BAS   Rret,CharStr
         L     RValue,=XL4'01'
         BAS   Rret,DigStr
         L     RValue,=XL4'02'
@@ -37,6 +40,37 @@ Rret    EQU  8   return address from subroutine
         BAS   Rret,DigStr
         L     RValue,=XL4'08'
         BAS   Rret,DigStr
+        BAS   Rret,PrtLn
+* Above hex numbers to the power of 2
+        LA    RValue,=C'SQRE'
+        BAS   Rret,CharStr
+        L     RValue,=XL4'01'
+        BAS   Rret,DigStr
+        L     RValue,=XL4'02'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'03'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'04'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'05'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'06'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'07'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'08'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        BAS   Rret,PrtLn
+*
+        LA    RValue,=C'HEX'
+        BAS   Rret,CharStr
         L     RValue,=XL4'09'
         BAS   Rret,DigStr
         L     RValue,=XL4'0A'
@@ -53,6 +87,38 @@ Rret    EQU  8   return address from subroutine
         BAS   Rret,DigStr
         L     RValue,=XL4'10'
         BAS   Rret,DigStr
+        BAS   Rret,PrtLn
+*
+        LA    RValue,=C'SQRE'
+        BAS   Rret,CharStr
+        L     RValue,=XL4'09'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0A'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0B'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0C'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0D'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0E'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'0F'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        L     RValue,=XL4'10'
+        MSR   RValue,RValue
+        BAS   Rret,DigStr
+        BAS   Rret,PrtLn
+*
+        LA    RValue,=C'HEX'
+        BAS   Rret,CharStr
         L     RValue,=XL4'11'
         BAS   Rret,DigStr
         L     RValue,=XL4'12'
@@ -69,23 +135,36 @@ Rret    EQU  8   return address from subroutine
         BAS   Rret,DigStr
         L     RValue,=XL4'18'
         BAS   Rret,DigStr
-        L     RValue,=XL4'19'
+        BAS   Rret,PrtLn
+*
+        LA    RValue,=C'SQRE'
+        BAS   Rret,CharStr
+        L     RValue,=XL4'11'
+        MSR   RValue,RValue
         BAS   Rret,DigStr
-        L     RValue,=XL4'1A'
+        L     RValue,=XL4'12'
+        MSR   RValue,RValue
         BAS   Rret,DigStr
-        L     RValue,=XL4'1B'
+        L     RValue,=XL4'13'
+        MSR   RValue,RValue
         BAS   Rret,DigStr
-        L     RValue,=XL4'1C'
+        L     RValue,=XL4'14'
+        MSR   RValue,RValue
         BAS   Rret,DigStr
-        L     RValue,=XL4'1D'
+        L     RValue,=XL4'15'
+        MSR   RValue,RValue
         BAS   Rret,DigStr
-        L     RValue,=XL4'1E'
+        L     RValue,=XL4'16'
+        MSR   RValue,RValue
         BAS   Rret,DigStr
-        L     RValue,=XL4'1F'
+        L     RValue,=XL4'17'
+        MSR   RValue,RValue
         BAS   Rret,DigStr
-        L     RValue,=XL4'20'
+        L     RValue,=XL4'18'
+        MSR   RValue,RValue
         BAS   Rret,DigStr
-        BAS   Rret,PrtnLn
+        BAS   Rret,PrtLn
+*
 *       exercise ends here ******
 *--------------------------------------------------------------------*
         CLOSE (RECDD)
@@ -153,12 +232,12 @@ Binary  DC    F'2'           binary number base
 Octal   DC    F'8'           octal number base
 Decimal DC    F'10'          decimal number base
 Hex     DC    F'16'          hexadecimal number base
-DigLen  DC    F'10'          Length of string
+DigLen  DC    F'4'           Length of string
 EBCDIC  DC    C'0123456789ABCDEF ' EBCDIC hex digits plus space
-StrLen  DC    F'50'          Length of line string
+StrLen  DC    F'70'          Length of line string
 *       Line buffer
 StrBuf  DC    C'                                                  '
-RECDD   DCB   DSORG=PS,MACRF=PM,DDNAME=RECDD,RECFM=FB,LRECL=51
+RECDD   DCB   DSORG=PS,MACRF=PM,DDNAME=RECDD,RECFM=FB,LRECL=71
         END Test
 /*
 //L.SYSLMOD  DD DSN=&SYSUID..LOAD(CONVD),DISP=SHR
