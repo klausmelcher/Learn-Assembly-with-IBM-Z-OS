@@ -20,11 +20,9 @@ Rret    EQU  8   return address
 *--------------------------------------------------------------------*
 *       exercise starts here ******
 *       (1)******
-*       Exercise made without loop
         L     RBase,Binary
         L     RValue,=F'26293'
         BAS   Rret,DigStr
-        BAS   Rret,PrtLn
         L     RBase,=F'4'
         L     RValue,=F'26293'
         BAS   Rret,DigStr
@@ -32,36 +30,32 @@ Rret    EQU  8   return address
         L     RBase,Octal
         L     RValue,=F'26293'
         BAS   Rret,DigStr
-        BAS   Rret,PrtLn
         L     RBase,Hex
         L     RValue,=F'26293'
         BAS   Rret,DigStr
         BAS   Rret,PrtLn
 *       (2)******
         L     RBase,Decimal
-        L     RValue,=XL4'002F ACED'
+        L     RValue,=XL4'2FACED'
         BAS   Rret,DigStr
-        BAS   Rret,PrtLn
         L     RBase,Binary
-        L     RValue,=XL4'002F ACED'
+        L     RValue,=XL4'2FACED'
         BAS   Rret,DigStr
         BAS   Rret,PrtLn
 *       (3)******
         L     RBase,Decimal
         L     RValue,=XL4'BABE F00D'
         BAS   Rret,DigStr
-        BAS   Rret,PrtLn
         L     RBase,Octal
         L     RValue,=XL4'BABE F00D'
         BAS   Rret,DigStr
         BAS   Rret,PrtLn
 *       (4)******
         L     RBase,Decimal
-        L     RValue,=XL4'00C0 FFEE'
+        L     RValue,=XL4'C0FFEE'
         BAS   Rret,DigStr
-        BAS   Rret,PrtLn
         L     RBase,Binary
-        L     RValue,=XL4'00C0 FFEE'
+        L     RValue,=XL4'C0FFEE'
         BAS   Rret,DigStr
         BAS   Rret,PrtLn
 *       exercise ends here ******
@@ -78,7 +72,7 @@ Rret    EQU  8   return address
 *         Sections 18.6.1, 37.1.1 and 37.1.2
 *       Author: Elmar Melcher, UFCG
 DigStr  L     RCount,DigLen  Get number of characters to produce
-NxtDig  SRDA  RValue,32      Sign-extend to double length using Rdiv
+NxtDig  SRDL  RValue,32      Extend to double length using Rdiv
         DR    RValue,RBase   Divide value by base, remainder in RValue
         IC    RValue,EBCDIC(RValue)  Get character form of remainder
         STC   RValue,StrBuf(RstrPos) Store character in string
