@@ -14,10 +14,11 @@ Doing so by using ETEMPL as starting template is quite easy.
 There are only a few things I need to know:
 
   1. put the value to display in a line like <br>
-  `L`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`RValue,=F'123'`<br>
-  I need to know how to write numbers in assembly to put the correct
-expression after the equal sign. Hexadecimal and binary numbers must
-be represented with 32 bits here.
+  `L`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`RValue,=F'123'` or<br>
+  `L`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`RValue,=XL4'1AB'` or<br>
+  `L`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`RValue,=BL4'01101'`<br>
+  Hexadecimal and binary numbers must use the length modifier `L4` to
+be represented using 32 bits. Octal number base is not available here.
 
   2. if I want to change the number base used for output, use <br>
   `L`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`RBase,Hex`&nbsp;&nbsp;or<br>
@@ -42,6 +43,12 @@ possible to display an empty line by repeating 4.
 The number of digits used for all the numbers displayed is in the line
 starting with `DigLen  DC` which can be found near the end of the
 ETEMPL2 file.
+
+It is also possible to display a character string:<br>
+  `LA`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`RValue,=C'Ehrman'`<br>
+  `BAS`&nbsp;&nbsp;&nbsp;&nbsp;`Rret,CharStr`
+
+Observe the use of `LA` instead of `L`. Only `DigLen` characters are displayed. If the string has more than `DigLen` characters, the remaining characters do not appear.
 
 ## Exercises missing here
 
