@@ -20,37 +20,37 @@ Rret    EQU  8   return address from subroutine
 *--------------------------------------------------------------------*
 *       exercise starts here ******
 *       Print 1
-        LA    RValue,=C'(1)'
+        LA    RValue,=C'   (1)'
         BAS   Rret,CharStr
         L     RValue,=XL4'257'  load hex number in value register
         BAS   Rret,DigStr       put value digits in line string
         BAS   Rret,PrtLn
 *       Print 2
-        LA    RValue,=C'(2)'
+        LA    RValue,=C'   (2)'
         BAS   Rret,CharStr
         L     RValue,=XL4'7FFA'
         BAS   Rret,DigStr
         BAS   Rret,PrtLn
 *       Print 3
-        LA    RValue,=C'(3)'
+        LA    RValue,=C'   (3)'
         BAS   Rret,CharStr
         L     RValue,=XL4'8008'
         BAS   Rret,DigStr
         BAS   Rret,PrtLn
 *       Print 4
-        LA    RValue,=C'(4)'
+        LA    RValue,=C'   (4)'
         BAS   Rret,CharStr
         L     RValue,=XL4'E000'
         BAS   Rret,DigStr
         BAS   Rret,PrtLn
 *       Print 5
-        LA    RValue,=C'(5)'
+        LA    RValue,=C'   (5)'
         BAS   Rret,CharStr
         L     RValue,=XL4'FFFA'
         BAS   Rret,DigStr
         BAS   Rret,PrtLn
 *       Print 6
-        LA    RValue,=C'(6)'
+        LA    RValue,=C'   (6)'
         BAS   Rret,CharStr
         L     RValue,=XL4'E1010'
         BAS   Rret,DigStr

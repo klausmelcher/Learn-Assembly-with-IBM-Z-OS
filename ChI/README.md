@@ -48,7 +48,7 @@ It is also possible to display a character string:<br>
   `LA`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`RValue,=C'Ehrman'`<br>
   `BAS`&nbsp;&nbsp;&nbsp;&nbsp;`Rret,CharStr`
 
-Observe the use of `LA` instead of `L`. Only `DigLen` characters are displayed. If the string has more than `DigLen` characters, the remaining characters do not appear.
+Observe the use of `LA` instead of `L`. Only `DigLen` characters are displayed. If the string has more than `DigLen` characters, the remaining characters do not appear. If the string has less than `DigLen` characters, the rest is filled with undesired characters.
 
 ## Exercises missing here
 
