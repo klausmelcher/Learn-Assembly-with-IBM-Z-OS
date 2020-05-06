@@ -1,0 +1,134 @@
+//E020401 JOB 1
+//    EXEC ASMACLG
+//C.SYSIN DD *
+*       Exercise 2.4.1
+Test    Start 0
+        Print NoGen
+        BAKR  14,0          SAVE CALLERS ENVIRONMENT
+        BASR  12,0          Establish a base register
+        Using *,12          tell the assembler about it
+        OPEN  (RECDD,OUTPUT)
+*       Register Usage: ******
+RBase   EQU  3   output number base (preserved in subroutine calls)
+RValue  EQU  4   value to get converted (will be destroyed)
+Raux    EQU  5   auxiliar register used inside subroutines
+RCount  EQU  6   counter for digit string
+RStrPos EQU  7   position in line buffer where to write
+Rret    EQU  8   return address from subroutine
+        L     RStrPos,StrLen  set string position to right margin
+        L     RBase,Decimal   set number base to decimal
+*--------------------------------------------------------------------*
+*       exercise starts here ******
+*       Print 1
+        LA    RValue,=C'   (1)'
+        BAS   Rret,CharStr
+        L     RBase,Octal
+        L     RValue,=F'31659'
+        BAS   Rret,DigStr
+        L     RBase,=F'4'
+        L     RValue,=F'31659'
+        BAS   Rret,DigStr
+        L     RBase,Binary
+        L     RValue,=F'31659'
+        BAS   Rret,DigStr
+        BAS   Rret,PrtLn
+*       Print 2
+        LA    RValue,=C'   (2)'
+        BAS   Rret,CharStr
+        L     RBase,=F'5'
+        L     RValue,=F'6917'
+        BAS   Rret,DigStr
+        L     RBase,=F'13'
+        L     RValue,=F'6917'
+        BAS   Rret,DigStr
+        L     RBase,Hex
+        L     RValue,=F'6917'
+        BAS   Rret,DigStr
+        BAS   Rret,PrtLn
+*       Print 3
+        LA    RValue,=C'   (3)'
+        BAS   Rret,CharStr
+        L     RBase,Decimal
+        L     RValue,=XL4'EF2A'
+        BAS   Rret,DigStr
+        L     RBase,=F'13'
+        L     RValue,=XL4'EF2A'
+        BAS   Rret,DigStr
+        BAS   Rret,PrtLn
+*       exercise ends here ******
+*--------------------------------------------------------------------*
+        CLOSE (RECDD)
+        J     EXIT
+*--------------------------------------------------------------------*
+*       Subroutine DigStr
+*         converts register value to digit string representation
+*       Input parameters:
+*         DigLen - number of digits for output string buffer
+*       References: J.R. Ehrman,
+*         Exercises 17.3.19 and 22.4.8
+*         Sections 18.6.1, 37.1.1 and 37.1.2
+*       Register Usage:
+*         Raux is auxiliar register for dividend
+*       Author: Elmar Melcher, UFCG
+DigStr  L     RCount,DigLen  Get number of characters to produce
+NxtDig  SRDL  RValue,32      Eextend to double length using Raux
+        DR    RValue,RBase   Divide value by base, remainder in RValue
+        IC    RValue,EBCDIC(RValue)  Get character form of remainder
+        STC   RValue,StrBuf(RstrPos) Store character in string
+        S     RStrPos,ONE    advance buffer position to the left
+        SLDL  RValue,32      Copy quotient from Raux to RValue
+        BCT   RCount,NxtDig  Repeat
+        S     RStrPos,ONE    leave one space
+        BR    Rret           Return - End of subroutine DigStr
+*--------------------------------------------------------------------*
+*       Subroutine CharStr
+*         copies character string to output string buffer
+*       Input parameters:
+*         DigLen - number of characters to copy
+*       Register Usage:
+*         RValue contains the address of the string to be copied
+*       Author: Elmar Melcher, UFCG
+CharStr L     RCount,DigLen  Get number of characters to copy
+        S     RValue,ONE     adjust stringg position to RCount
+NxtChar IC    Raux,0(RValue,RCount) Get character to copy
+        STC   Raux,StrBuf(RStrPos)  Store character in buffer
+        S     RStrPos,ONE    Move output buffer pointer to the left
+        BCT   RCount,NxtChar Repeat
+        S     RStrPos,ONE    Leave one space
+        BR    Rret           Return - End of subroutine CharStr
+*--------------------------------------------------------------------*
+*       Subroutine PrtLn
+*         prints string line buffer,
+*         then fills it with space and
+*         resets string position to rightmost position
+*       Register Usage:
+RSpace  EQU  4   value for space character (overlay of RValue)
+*       Input parameters: none
+*       Author: Elmar Melcher, UFCG
+PrtLn   PUT   RECDD,StrBuf   Send string to output
+        L     RCount,StrLen  get number of characters in string
+        LA    RSpace,16      load position of space character
+        IC    RSpace,EBCDIC(RSpace)  load space character
+Wipe    STC   RSpace,StrBuf(RCount)  store space character in string
+        BCT   RCount,Wipe    repeat
+        L     RStrPos,StrLen set string position to right margin
+        BR    Rret           Return - End of subroutine PrtLn
+*--------------------------------------------------------------------*
+EXIT    DS    0H             HALFWORD BOUNDRY ALIGNMENT
+        PR                   RETURN TO CALLER
+        EJECT
+ONE     DC    F'1'           constant 1
+Binary  DC    F'2'           binary number base
+Octal   DC    F'8'           octal number base
+Decimal DC    F'10'          decimal number base
+Hex     DC    F'16'          hexadecimal number base
+DigLen  DC    F'6'           Length of string
+EBCDIC  DC    C'0123456789ABCDEF ' EBCDIC hex digits plus space
+StrLen  DC    F'50'          Length of line string
+*       Line buffer
+StrBuf  DC    C'                                                  '
+RECDD   DCB   DSORG=PS,MACRF=PM,DDNAME=RECDD,RECFM=FB,LRECL=51
+        END Test
+/*
+//L.SYSLMOD  DD DSN=&SYSUID..LOAD(CONVD),DISP=SHR
+//G.RECDD    DD SYSOUT=*
